@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGIDI KONDALA BHAVANI - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+            color: #334155; /* Darker text */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #1e293b; /* Slate-900 */
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #6366f1; /* Indigo-500 */
+            margin: 0.75rem auto 0;
+            border-radius: 9999px; /* rounded-full */
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* rounded-3xl */
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .skill-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e0e7ff; /* Indigo-100 */
+            color: #4338ca; /* Indigo-700 */
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* rounded-full */
+            font-weight: 500; /* font-medium */
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            white-space: nowrap;
+            transition: background-color 0.3s ease;
+        }
+        .skill-badge:hover {
+            background-color: #c7d2fe; /* Indigo-200 */
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background-color: #6366f1; /* Indigo-500 */
+            color: white;
+            border-radius: 50%; /* rounded-full */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .social-link:hover {
+            background-color: #4f46e5; /* Indigo-600 */
+            transform: translateY(-3px);
+        }
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            height: 100%; /* Ensure cards are same height in flex/grid */
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .project-image {
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+        }
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+        }
+        .project-description {
+            font-size: 1rem;
+            color: #475569; /* Slate-600 */
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .project-meta {
+            font-size: 0.875rem; /* text-sm */
+            color: #64748b; /* Slate-500 */
+            margin-top: auto; /* Pushes meta to bottom */
+        }
+        .experience-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .experience-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1e293b;
+        }
+        .experience-date {
+            font-size: 0.875rem; /* text-sm */
+            color: #64748b;
+            font-weight: 500;
+        }
+        .experience-company {
+            font-size: 1rem;
+            color: #475569;
+            font-weight: 500;
+        }
+        .experience-description {
+            font-size: 0.95rem;
+            color: #475569;
+            margin-top: 0.5rem;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem; /* text-3xl for smaller screens */
+            }
+            .container {
+                padding: 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .project-title {
+                font-size: 1.25rem; /* text-xl for smaller screens */
+            }
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .experience-date {
+                margin-top: 0.25rem;
+            }
+            .project-image {
+                height: 150px; /* Adjust height for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-700">
+    <!-- Header/Navigation (Optional, but good for single page) -->
+    <header class="bg-white shadow-sm py-4">
+        <nav class="container flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-indigo-600 rounded-md p-2 hover:bg-indigo-50 transition-colors">PAGIDI KONDALA BHAVANI
+                
+            </a>
+            <div class="space-x-4 flex items-center">
+                <a href="#about" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">About</a>
+                <a href="#skills" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Skills</a>
+                <a href="#experience" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Experience</a>
+                <a href="#projects" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Projects</a>
+                <a href="#contact" class="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20 text-center rounded-b-3xl shadow-lg">
+        <div class="container">
+            <div class="w-32 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                <!-- Placeholder for profile picture or icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user text-indigo-600">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold mb-4 leading-tight">PAGIDI KONDALA BHAVANI</h1>
+            <p class="text-xl mb-8">Highly motivated and skilled upcoming engineer specializing in Electrical and Electronics Engineering, seeking a Machine Learning Engineer position in the AI/ML industry.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://linkedin.com/in/pagidi-kondala-bhavani-36750b280" target="_blank" class="social-link" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://github.com/Bunny-cell11" target="_blank" class="social-link" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.44-.78-3.46 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.51 1.02-.86 2.21-.78 3.46 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+                <a href="mailto:bhavanipagidikondala@gmail.com" class="social-link" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <p class="text-lg text-slate-700">
+                    Possessing practical experience through job simulations and projects, I offer robust analytical skills and a commitment to advanced technologies to solve real-world challenges. My specialization in Electrical and Electronics Engineering complements my strong foundation in Machine Learning and AI, enabling me to approach complex problems with a unique interdisciplinary perspective.
+                </p>
+                <p class="text-lg text-slate-700 mt-4">
+                    I am passionate about developing innovative solutions and continuously expanding my knowledge in the AI/ML industry. My experience includes conducting exploratory data analysis, designing AI-driven strategies, and developing machine learning models for real-world applications.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-gray-100">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="card">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code text-indigo-500 mr-2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            Programming
+                        </h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">CSS</span>
+                            <span class="skill-badge">HTML</span>
+                            <span class="skill-badge">Java</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain text-indigo-500 mr-2"><path d="M12 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/><path d="M12 18a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19 12a7 7 0 0 0-7-7c-1.85 0-3.55.6-4.95 1.6L3 3"/><path d="M5 12a7 7 0 0 0 7 7c1.85 0 3.55-.6 4.95-1.6L21 21"/><path d="M6.8 8.4a7 7 0 0 0 0 7.2"/></svg>
+                            Artificial Intelligence
+                        </h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-badge">Neural Networks</span>
+                            <span class="skill-badge">Natural Language Processing (NLP)</span>
+                            <span class="skill-badge">LLM (Large Language Model)</span>
+                            <span class="skill-badge">Computer Vision</span>
+                            <span class="skill-badge">OpenCV</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database text-indigo-500 mr-2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 9 0 0 0 21 12"/></svg>
+                            Data Science
+                        </h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-badge">Machine Learning</span>
+                            <span class="skill-badge">Deep Learning</span>
+                            <span class="skill-badge">Data Analytics</span>
+                            <span class="skill-badge">Data Analysis</span>
+                            <span class="skill-badge">Statistical Modeling</span>
+                            <span class="skill-badge">Data Visualization</span>
+                            <span class="skill-badge">Pandas</span>
+                            <span class="skill-badge">NumPy</span>
+                            <span class="skill-badge">Tableau</span>
+                            <span class="skill-badge">Google Analytics</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-laptop text-indigo-500 mr-2"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.91 1.45H3.63a1 1 0 0 1-.91-1.45L4 16"/></svg>
+                            Operating Systems
+                        </h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-badge">Linux</span>
+                            <span class="skill-badge">Ubuntu</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tool text-indigo-500 mr-2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            Tools
+                        </h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-badge">Microsoft Azure</span>
+                            <span class="skill-badge">MATLAB</span>
+                            <span class="skill-badge">Arduino</span>
+                            <span class="skill-badge">GitHub</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-indigo-500 mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Soft Skills
+                        </h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-badge">Analytical Thinking</span>
+                            <span class="skill-badge">Problem Solving</span>
+                            <span class="skill-badge">Teamwork</span>
+                            <span class="skill-badge">Research and Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="card space-y-8">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">DATA ANALYTICS (Job Simulation on Forage)</h3>
+                        <span class="experience-date">Jun 2025 - July 2025</span>
+                    </div>
+                    <p class="experience-company">TATA Group</p>
+                    <ul class="list-disc list-inside text-slate-700 space-y-1 experience-description">
+                        <li>Completed a job simulation involving AI-powered data analytics and strategy development for the Financial Services team at Tata iQ.</li>
+                        <li>Conducted exploratory data analysis (EDA) using GenAI tools to assess data quality, identify risk indicators, and structure insights for predictive modeling.</li>
+                        <li>Designed an AI-driven collections strategy leveraging agentic AI and automation, incorporating ethical AI principles, regulatory compliance, and scalable implementation frameworks.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">DATA VISUALISATION (Virtual Job Simulation)</h3>
+                        <span class="experience-date">Apr 2025 - Apr 2025</span>
+                    </div>
+                    <p class="experience-company">TATA GROUP</p>
+                    <ul class="list-disc list-inside text-slate-700 space-y-1 experience-description">
+                        <li>Completed a simulation involving creating data visualizations for Tata Consultancy Services.</li>
+                        <li>Prepared questions for a meeting with client senior leadership.</li>
+                        <li>Created visuals for data analysis to help executives with effective decision making.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">ADVANCED SOFTWARE ENGINEERING (Virtual Job Simulation)</h3>
+                        <span class="experience-date">Mar 2025 - Apr 2025</span>
+                    </div>
+                    <p class="experience-company">WALMART USA</p>
+                    <ul class="list-disc list-inside text-slate-700 space-y-1 experience-description">
+                        <li>Completed the Advanced Software Engineering Job Simulation where I solved difficult technical projects for a variety of teams at Walmart.</li>
+                        <li>Developed a novel version of a heap data structure in Java for Walmart's shipping department, showcasing strong problem-solving and algorithmic skills.</li>
+                        <li>Designed a UML class diagram for a data processor, considering different operating modes and database connections.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-gray-100">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/6366f1/ffffff?text=EV+Range+Estimation" alt="EV Range Estimation Project" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">EV RANGE ESTIMATION USING MACHINE LEARNING (REGRESSION MODELS)</h3>
+                        <p class="project-description">
+                            Developed a machine learning model to estimate Electric Vehicle range, leveraging historical driving data and environmental factors to predict accurate range estimates.
+                        </p>
+                        <p class="project-meta">
+                            <span class="font-semibold">Technologies:</span> Machine Learning, Regression Models, Python
+                        </p>
+                        <p class="project-meta mt-1">
+                            <span class="font-semibold">Duration:</span> Sep 2024 - Dec 2024
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/6366f1/ffffff?text=Sign+Language+Detection" alt="Sign Language Detection Project" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">SIGN LANGUAGE DETECTION</h3>
+                        <p class="project-description">
+                            Developed a deep learning model for sign language detection, utilizing computer vision techniques to recognize and classify hand gestures and finger positions accurately.
+                        </p>
+                        <p class="project-meta">
+                            <span class="font-semibold">Technologies:</span> Deep Learning, Computer Vision, Python
+                        </p>
+                        <p class="project-meta mt-1">
+                            <span class="font-semibold">Duration:</span> Apr 2025 - May 2025
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="card">
+                <h3 class="text-xl font-semibold text-slate-800 mb-2">RAJIV GANDHI UNIVERSITY OF KNOWLEDGE TECHNOLOGIES</h3>
+                <p class="text-lg text-slate-700">Bachelor of Technology in ELECTRICAL AND ELECTRONICS ENGINEERING</p>
+                <p class="text-md text-slate-600">RK-Valley, Kadapa</p>
+                <p class="text-md text-slate-600 mt-2">Sep 2022 - May 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="card text-center">
+                <p class="text-lg text-slate-700 mb-4">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <div class="flex flex-col items-center space-y-4">
+                    <a href="mailto:bhavanipagidikondala@gmail.com" class="text-indigo-600 hover:text-indigo-800 text-lg font-medium flex items-center transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail mr-2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        bhavanipagidikondala@gmail.com
+                    </a>
+                    <a href="tel:+919491735140" class="text-slate-700 hover:text-indigo-600 text-lg font-medium flex items-center transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2.02 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        +91 9491735140
+                    </a>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://linkedin.com/in/pagidi-kondala-bhavani-36750b280" target="_blank" class="social-link w-10 h-10" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://github.com/Bunny-cell11" target="_blank" class="social-link w-10 h-10" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.44-.78-3.46 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.51 1.02-.86 2.21-.78 3.46 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-8 text-center mt-12 rounded-t-3xl shadow-lg">
+        <div class="container">
+            <p>&copy; 2025 PAGIDI KONDALA BHAVANI. All rights reserved.</p>
+            <p class="text-sm mt-2">Designed with <span class="text-red-500">&hearts;</span> and Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
